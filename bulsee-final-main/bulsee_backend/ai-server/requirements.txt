@@ -1,9 +1,23 @@
-fastapi
-uvicorn
-httpx
-requests
-pydantic
-torch
-numpy
-pandas
-scikit-learn
+# BulSee AI Server - 산불 위험도·피해 예측
+# Python 3.10+ 권장
+
+# === API 서버 ===
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+httpx>=0.26.0
+requests>=2.31.0
+pydantic>=2.5.0
+
+# === 수치·데이터 처리 ===
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0
+
+# === 머신러닝 (Random Forest, XGBoost) ===
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+
+# === 딥러닝 (GRU, Transformer 등) ===
+torch>=2.0.0
+
+# === 기상·공공 API 연동 등 (선택) ===
+# transformers>=4.36.0  # Transformer Encoder 실험 시 주석 해제
