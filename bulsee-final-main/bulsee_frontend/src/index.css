@@ -1,0 +1,37 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+
+
+/* 지도 높이 100% 확보 */
+
+html, body, #root {
+
+  height: 100%;
+
+  margin: 0;
+
+}
+
+/* src/index.css */
+
+/* 지도 채도를 살짝 낮추고 밝기를 올려서 데이터(원)가 잘 보이게 함 */
+.map-tiles-soft {
+  filter: saturate(0.8) brightness(1.05); 
+}
+
+/* 글로벌 CSS 파일 혹은 스타일 태그에 추가 */
+
+.map-tiles-soft img {
+
+  filter: saturate(0.6) brightness(1.05); /* 채도를 낮추고 밝기를 살짝 올림 */
+
+}
+
+/* 지도상의 요소(path)를 클릭했을 때 생기는 검은 테두리(포커스) 제거 */
+path.leaflet-interactive:focus {
+  outline: none;
+}

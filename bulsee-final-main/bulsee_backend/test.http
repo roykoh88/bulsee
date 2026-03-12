@@ -1,0 +1,8 @@
+### 산불 시뮬레이션 테스트 실행
+POST http://localhost:8080/api/analysis/simulate/108
+Content-Type: application/json
+
+{
+  "lat": 37.5665,
+  "lng": 126.9780
+}

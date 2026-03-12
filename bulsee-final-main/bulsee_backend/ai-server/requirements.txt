@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+httpx
+requests
+pydantic
+torch
+numpy
+pandas
+scikit-learn

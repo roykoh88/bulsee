@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  # 1. 오라클 (Jamy 님의 공식 이미지 적용)
+  db:
+    image: container-registry.oracle.com/database/express:latest
+    container_name: wf-oracle-db
+    ports:
+      - "1522:1521"
+    environment:
+      - ORACLE_PWD=1234 # properties에 적으신 비번
+    volumes:
+      # 위 inspect 명령어로 찾은 경로가 있다면 그 경로를 왼쪽에 적으세요.
+      - ./oracle_base:/opt/oracle/oradata
+
+  # 2. AI 서버 (backend/ai-server 폴더)
+  ai:
+    build: ./bulsee_backend/ai-server
+    container_name: wf-ai-server
+    ports:
+      - "8000:8000"
+
+  # 3. 백엔드 (Spring Boot)
+  backend:
+    build: ./bulsee_backend
+    container_name: wf-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - ai
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@db:1521:xe
+      - SPRING_DATASOURCE_USERNAME=c##fire
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - PYTHON_API_URL=http://ai:8000
+
+  # 4. 프론트엔드 (Vite)
+  frontend:
+    build: ./bulsee_frontend
+    container_name: wf-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080
